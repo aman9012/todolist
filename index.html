@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        #main{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: bisque;
+            user-select: none;
+        }
+        #box{
+            user-select: none;
+            width: 600px;
+            height: 700px;
+            padding: 15px;
+            background-color: beige;
+            box-shadow: 0px 0px 15px 5px grey;
+            border-radius: 10px;
+            overflow: scroll;            
+        }
+
+        #input{
+            display: block;
+            width: 100%;
+            padding: 11px;
+            font-weight: bold;
+            margin: 20px 0px;
+            font-size: 1.8rem;
+            background-color: aliceblue;
+            color: black;
+            border: none;
+            box-shadow: 0px 0px 2px grey;
+            border-radius: 10px;
+        }
+        #to-do{
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            user-select: none;
+        }
+        #to-do li{
+            margin:15px;
+            border-radius: 33px;
+            padding:16px 26px;
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            user-select: none;
+        }
+        .done{
+            user-select: none; 
+            text-decoration: line-through;
+            background-color: grey !important;
+            color: black;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="box">
+            <input type="text" id="input" placeholder="write your task" autofocus="">
+            <ul id="to-do">
+                <!-- <li>create to-do list
+                    <i class="delete fa-solid a fa-trash"></i>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/1e2205a97a.js" crossorigin="anonymous"></script>
+</body>
+<script>
+    const input = document.querySelector("#input")
+    const todo = document.querySelector("#to-do")
+
+    input.addEventListener("keyup", function(event){
+        if(event.key == "Enter"){
+            addtodo(this.value);
+            this.value = "";
+        }
+    })
+
+    const addtodo = (text)=>{
+        const listitem = document.createElement("li");
+        listitem.innerHTML= `
+        ${text}
+        <i class="delete fa-solid a fa-trash"></i>
+        `;
+
+        listitem.addEventListener("click", function(){
+            this.classList.toggle("done")
+        })
+
+        listitem.querySelector("i").addEventListener("click",
+        function(){
+            listitem.remove();
+        }
+        )
+
+        todo.appendChild(listitem);
+    }
+
+
+</script>
+</html>
